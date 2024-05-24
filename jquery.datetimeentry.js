@@ -1028,6 +1028,13 @@
 			@param inst {object} The instance settings.
 			@param value {string} The new value. */
 		_setValue: function(inst, value) {
+			var zoneMatches = inst.elem.val().match(/\s*[+-]\d{2}:\d{2}/) || [];
+			var zone = zoneMatches[0];
+
+			if (zone) {
+				value = `${value} ${zone}`;
+			}
+
 			if (value !== inst.elem.val()) {
 				if (inst.options.altField) {
 					$(inst.options.altField).val(!value ? '' : this._formatDatetime(inst,
