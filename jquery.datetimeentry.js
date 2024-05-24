@@ -365,7 +365,7 @@
 				var end = 0;
 				for (var field = 0; field < datetimeFormat.length; field++) {
 					end += plugin._fieldLength(inst, datetimeFormat.charAt(field));
-					if (input.selectionStart < end) {
+					if (input.selectionStart <= end) {
 						break;
 					}
 					select += (datetimeFormat.charAt(field).match(/[yondwhmsa]/i) ? 1 : 0);
