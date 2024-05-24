@@ -86,6 +86,7 @@
 		defaultOptions: {
 			appendText: '',
 			initialField: null,
+			noSeparatorEntry: false,
 			tabToExit: false,
 			useMouseWheel: true,
 			shortYearCutoff: '+10',
@@ -478,8 +479,12 @@
 				this._setDatetime(inst, new Date(
 					year + (year >= 100 || field !== 'y' ? 0 : (year > shortYearCutoff ? 1900 : 2000)),
 					month - 1, day, fields[0], fields[1], fields[2]));
-				inst._lastChr = (field !== 'Y' ? '' :
-					inst._lastChr.substr(Math.max(0, inst._lastChr.length - 2))) + chr;
+
+				if (inst.options.noSeparatorEntry && ((field == 'Y' && inst._lastChr.length == 3) || field != 'Y' && inst._lastChr)) {
+					this._changeField(inst, +1, false);
+				} else {
+					inst._lastChr = (field !== 'Y' ? '' : inst._lastChr.substr(Math.max(0, inst._lastChr.length - 2))) + chr;
+				}
 			}
 			else if (field.match(/n/i)) { // Allow text entry by month name
 				inst._lastChr += chr;
