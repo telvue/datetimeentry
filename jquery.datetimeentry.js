@@ -411,7 +411,7 @@
               // Move to next date/time field, or out if at the end
               plugin._changeField(inst, +1, true)));
         case 35: if (event.ctrlKey) { // Clear date/time on ctrl+end
-              plugin._setTime(inst, null);
+              plugin._setDatetime(inst, null);
 
               // Need to get this to the back of the event queue.
               setTimeout(function() {
@@ -437,7 +437,7 @@
         case 39: plugin._changeField(inst, +1, false); break; // Next field on right
         case 40: plugin._adjustField(inst, -1); break; // Decrement date/time field on down
         case 46: // Clear date/time on delete
-          plugin._setTime(inst, null);
+          plugin._setDatetime(inst, null);
 
           // Need to get this to the back of the event queue.
           setTimeout(function() {
@@ -1112,9 +1112,14 @@
       @param datetime {Date|number|string} An actual date or offset in seconds from now or
             units and periods of offsets from now. */
     _setDatetime: function(inst, datetime) {
+      var fallbackDate = new Date();
+      fallbackDate.setHours(0);
+      fallbackDate.setMinutes(0);
+      fallbackDate.setSeconds(0);
+
       // Normalise to base time
       datetime = this._normaliseDatetime(this._determineDatetime(inst,
-        datetime || inst.options.defaultDatetime) || new Date());
+        datetime || inst.options.defaultDatetime) || fallbackDate);
       var fields = this._constrainTime(inst,
         [datetime.getHours(), datetime.getMinutes(), datetime.getSeconds()]);
       datetime.setHours(fields[0], fields[1], fields[2]);
