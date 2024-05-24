@@ -411,7 +411,8 @@
               // Move to next date/time field, or out if at the end
               plugin._changeField(inst, +1, true)));
         case 35: if (event.ctrlKey) { // Clear date/time on ctrl+end
-              plugin._setValue(inst, '');
+              inst._field = 0;
+              inst.elem.val('');
             }
             else { // Last field on end
               inst._field = inst._fields.length - 1;
@@ -430,7 +431,10 @@
         case 38: plugin._adjustField(inst, +1); break; // Increment date/time field on up
         case 39: plugin._changeField(inst, +1, false); break; // Next field on right
         case 40: plugin._adjustField(inst, -1); break; // Decrement date/time field on down
-        case 46: plugin._setValue(inst, ''); break; // Clear date/time on delete
+        case 46: // Clear date/time on delete
+          inst._field = 0;
+          inst.elem.val('');
+          break;
         default: return true;
       }
       return false;
