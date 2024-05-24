@@ -742,8 +742,13 @@
 			@param inst {object} The instance settings.
 			@param event {Event} The triggering event or <code>null</code>. */
 		_extractDatetime: function(inst, event) {
+			var fallbackDate = new Date();
+			fallbackDate.setHours(0);
+			fallbackDate.setMinutes(0);
+			fallbackDate.setSeconds(0);
+
 			var currentDatetime = this._parseDatetime(inst, inst.elem.val()) || this._normaliseDatetime(
-				this._determineDatetime(inst, inst.options.defaultDatetime) || new Date());
+				this._determineDatetime(inst, inst.options.defaultDatetime) || fallbackDate);
 			var fields = this._constrainTime(inst, [currentDatetime.getHours(),
 				currentDatetime.getMinutes(), currentDatetime.getSeconds()]);
 			inst._selectedYear = currentDatetime.getFullYear();
