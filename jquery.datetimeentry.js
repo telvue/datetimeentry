@@ -24,10 +24,10 @@
 		@example $(selector).datetimeEntry()
  $(selector).datetimeEntry({showSeconds: true, minTime: new Date(0, 0, 0, 12, 0, 0)}) */
 	$.JQPlugin.createPlugin({
-	
+
 		/** The name of the plugin. */
 		name: pluginName,
-			
+
 		/** Date/time entry before show callback.
 			Triggered when the input field is focussed.
 			@callback beforeShowCallback
@@ -36,11 +36,11 @@
 			@example beforeShow: function(input) {
 	// Cross-populate minimum/maximum times for a range
  	return {minDatetime: (input.id === 'timeTo' ?
- 		$('#timeFrom').datetimeEntry('getDatetime') : null), 
+ 		$('#timeFrom').datetimeEntry('getDatetime') : null),
  		maxDatetime: (input.id === 'timeFrom' ?
  		$('#timeTo').datetimeEntry('getDatetime') : null)};
  } */
-			
+
 		/** Default settings for the plugin.
 			@property [appendText=''] {string} Display text following the input box, e.g. showing the format.
 			@property [initialField=null] {number} The field to highlight initially, or <code>null</code> for none.
@@ -144,7 +144,7 @@
 				isRTL: false
 			}
 		},
-		
+
 		_getters: ['getDatetime', 'getOffset', 'isDisabled'],
 
 		_appendClass: pluginName + '-append', // Class name for the appended content
@@ -157,7 +157,7 @@
 			return {_field: 0, _selectedYear: 0, _selectedMonth: 0, _selectedDay: 0,
 				_selectedHour: 0, _selectedMinute: 0, _selectedSecond: 0};
 		},
-		
+
 		_postAttach: function(elem, inst) {
 			this._decodeDatetimeFormat(inst);
 			elem.on('focus.' + inst.name, this._doFocus).
@@ -187,7 +187,7 @@
 			// And re-add if requested
 			var spinner = (!inst.options.spinnerImage ? null :
 				$('<span class="' + this._controlClass + '" style="display: inline-block; ' +
-				'background: url(\'' + inst.options.spinnerImage + '\') 0 0 no-repeat; width: ' + 
+				'background: url(\'' + inst.options.spinnerImage + '\') 0 0 no-repeat; width: ' +
 				inst.options.spinnerSize[0] + 'px; height: ' + inst.options.spinnerSize[1] + 'px;"></span>'));
 			elem.after(inst.options.appendText ? '<span class="' + this._appendClass + '">' +
 				inst.options.appendText + '</span>' : '').after(spinner || '');
@@ -731,7 +731,7 @@
 			$(spinner).css('background-position', '-' + ((region + 1) *
 				inst.options[inst._expanded ? 'spinnerBigSize' : 'spinnerSize'][0]) + 'px 0px');
 		},
-		
+
 		/** Extract the date/time value from the input field, or default to now.
 			@private
 			@param inst {object} The instance settings.
@@ -800,14 +800,14 @@
 					case 'y': case 'Y':
 						year = num;
 						skipNumber();
-						seen[0] = true; 
+						seen[0] = true;
 						break;
 					case 'o': case 'O':
 						month = num;
 						skipNumber();
-						seen[1] = true; 
+						seen[1] = true;
 						break;
-					case 'n': case 'N': 
+					case 'n': case 'N':
 						var monthNames = inst.options[field === 'N' ? 'monthNames' : 'monthNamesShort'];
 						for (var j = 0; j < monthNames.length; j++) {
 							if (value.substring(index).substr(0, monthNames[j].length).toLowerCase() ===
@@ -817,7 +817,7 @@
 								break;
 							}
 						}
-						seen[1] = true; 
+						seen[1] = true;
 						break;
 					case 'w': case 'W':
 						var dayNames = inst.options[field === 'W' ? 'dayNames' : 'dayNamesShort'];
@@ -834,7 +834,7 @@
 					case 'd': case 'D':
 						day = num;
 						skipNumber();
-						seen[2] = true; 
+						seen[2] = true;
 						break;
 					case 'h': case 'H':
 						hour = num;
@@ -1250,7 +1250,7 @@
 			return fields;
 		}
 	});
-	
+
 	var plugin = $.datetimeEntry;
 
 })(jQuery);
