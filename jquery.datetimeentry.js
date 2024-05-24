@@ -1,4 +1,5 @@
 /* http://keith-wood.name/datetimeEntry.html
+   https://github.com/telvue/datetimeentry
    Date and time entry for jQuery v2.0.0.
    Written by Keith Wood (kbwood{at}iinet.com.au) September 2010.
    Licensed under the MIT (https://github.com/jquery/jquery/blob/master/MIT-LICENSE.txt) license.
